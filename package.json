@@ -1,0 +1,15 @@
+{
+  "name": "my-jobs-root",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix my-jobs-front start",
+    "dev": "npm --prefix my-jobs-front dev",
+    "build": "npm --prefix my-jobs-front build",
+    "preview": "npm --prefix my-jobs-front preview",
+    "lint": "npm --prefix my-jobs-front lint",
+    "format": "npm --prefix my-jobs-front format"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.99.0"
+  }
+}

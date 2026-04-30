@@ -1,0 +1,191 @@
+.projects-page {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.projects-page__title {
+  margin-top: 1.5rem;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.projects-page__intro {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  color: var(--muted-foreground);
+}
+.projects-page__filters {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.projects-page__filter {
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted-foreground);
+  background: transparent;
+  transition: all 0.2s;
+}
+.projects-page__filter:hover {
+  border-color: var(--acid);
+  color: var(--foreground);
+}
+.projects-page__filter--active {
+  border-color: var(--acid);
+  background: var(--acid);
+  color: var(--acid-foreground);
+}
+.projects-page__grid {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+}
+.projects-page__grid-item {
+  background: var(--background);
+}
+.project-card {
+  display: block;
+  padding: 2rem;
+  transition: background-color 0.2s;
+}
+.project-card:hover {
+  background: var(--surface);
+}
+.project-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.project-card__meta {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+.project-card__title {
+  margin-top: 2rem;
+  font-size: 1.875rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.project-card:hover .project-card__title {
+  color: var(--acid);
+}
+.project-card__client {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted-foreground);
+}
+.project-card__summary {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: color-mix(in oklab, var(--foreground) 80%, transparent);
+}
+.project-card__tags {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.project-card__tag {
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.project-card__bottom {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.project-card__metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--acid) 40%, transparent);
+  background: color-mix(in oklab, var(--acid) 10%, transparent);
+  color: var(--acid);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.project-card__case {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted-foreground);
+}
+.project-card:hover .project-card__case {
+  color: var(--acid);
+}
+.projects-page__next {
+  margin-top: 6rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 2.5rem;
+  text-align: center;
+}
+.projects-page__next-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+.projects-page__accent {
+  color: var(--acid);
+}
+.projects-page__next-cta {
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  background: var(--acid);
+  color: var(--acid-foreground);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  transition: opacity 0.2s;
+}
+.projects-page__next-cta:hover {
+  opacity: 0.9;
+}
+@media (min-width: 768px) {
+  .projects-page__title {
+    font-size: 6rem;
+  }
+
+  .projects-page__next-title {
+    font-size: 3rem;
+  }
+
+  .projects-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .projects-page__next {
+    padding: 4rem;
+  }
+}
+@media (min-width: 640px) {
+  .projects-page__title {
+    font-size: 4.5rem;
+  }
+
+  .projects-page__next-title {
+    font-size: 3rem;
+  }
+}

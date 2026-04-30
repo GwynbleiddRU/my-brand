@@ -1,0 +1,76 @@
+.router-error {
+  min-height: 100vh;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+}
+
+.router-error__content {
+  max-width: 28rem;
+  text-align: center;
+}
+.router-error__icon-wrap {
+  margin: 0 auto 1.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in oklab, var(--destructive) 10%, transparent);
+}
+.router-error__icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--destructive);
+}
+.router-error__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.router-error__desc {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+.router-error__dev-message {
+  margin-top: 1rem;
+  max-height: 10rem;
+  overflow: auto;
+  border-radius: 0.375rem;
+  background: var(--muted);
+  padding: 0.75rem;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--destructive);
+}
+.router-error__actions {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.router-error__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+.router-error__btn--primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.router-error__btn--secondary {
+  border: 1px solid var(--input);
+  background: var(--background);
+  color: var(--foreground);
+}

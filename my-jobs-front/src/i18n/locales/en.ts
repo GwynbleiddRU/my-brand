@@ -1,0 +1,235 @@
+const en = {
+  nav: {
+    index: "Home",
+    about: "About",
+    projects: "Projects",
+    pricing: "Pricing & FAQ",
+    cta: "Start a project →",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    language: "Language",
+  },
+  footer: {
+    tagline:
+      "Independent engineer. Building durable software for founders and teams who care about craft.",
+    sitemap: "Sitemap",
+    contact: "Contact",
+    rights: "© {{year}} studio.dev",
+    availability: "Available for new work — Q3 / Q4",
+  },
+  notFound: {
+    label: "error / 404",
+    title: "Lost.",
+    desc: "This route does not exist in the manifest.",
+    back: "← Back to index",
+  },
+  common: {
+    back: "Back",
+    email: "hello@studio.dev →",
+  },
+  home: {
+    chip: "available for hire",
+    chipVersion: "v.2026 — independent",
+    titleA: "I build",
+    titleSoftware: "software",
+    titleB: "that ships.",
+    intro:
+      "Independent engineer working on websites, landing pages, AI-integrated apps, cross-platform products and C# backend systems. Comfortable owning a problem end-to-end — from architecture to the last pixel.",
+    viewProjects: "View projects",
+    pricing: "Pricing & FAQ",
+    metrics: {
+      years: "years shipping",
+      delivered: "projects delivered",
+      countries: "countries served",
+      code: "code I wrote",
+    },
+    services: {
+      chip: "§ services",
+      heading: "Jobs I take.",
+      intro: "From a one-week landing page to multi-quarter API platforms. Pick a card or",
+      askLink: " ask about a custom scope",
+      items: {
+        web: {
+          title: "Websites & Landing Pages",
+          desc: "Marketing sites and product pages that load instantly, rank well, and convert. Built with modern stacks and clean SEO.",
+        },
+        ai: {
+          title: "AI-Integrated Apps",
+          desc: "LLM features, RAG pipelines, agents and AI workflows wired into real products — not demos.",
+        },
+        cross: {
+          title: "Cross-Platform Apps",
+          desc: "One codebase, native feel — iOS, Android and web from a single team-of-one.",
+        },
+        csharp: {
+          title: "C# Backend Improvements",
+          desc: "Refactors, performance tuning, observability and test coverage on existing .NET services.",
+        },
+        api: {
+          title: "API Development",
+          desc: "REST and gRPC APIs, microservices with Docker, API gateways and event-driven architectures.",
+        },
+        long: {
+          title: "Long-Term Engagements",
+          desc: "Open to discussion: complex problems, retainers, or ongoing partnership on critical systems.",
+        },
+      },
+    },
+    cta: {
+      chip: "§ next step",
+      title: "Got a problem worth",
+      titleAccent: "solving",
+      titleEnd: "?",
+      desc: "I take a small number of projects per quarter. Tell me what you're building and I'll come back with an honest estimate within 48h.",
+    },
+  },
+  about: {
+    chip: "§ about",
+    title1: "Engineer.",
+    title2: "Operator.",
+    title3: "Partner.",
+    intro1:
+      "I'm a self-employed software engineer with a soft spot for systems that have to keep running while no one is watching. My day-to-day rotates between TypeScript on the front and C# / .NET on the back — with a steadily growing chapter on AI integrations.",
+    intro2:
+      "Most of my clients are small product teams, founders, and agencies who need a senior pair of hands without the overhead of a full hire. I work async-first, write down decisions, and over-communicate by default. If you've ever wondered what your contractor is actually doing, you'll like working with me.",
+    principles: {
+      p1: { t: "Ship small, ship often", d: "Tiny PRs, visible progress. Surprises are bugs in the process." },
+      p2: { t: "Boring tech wins", d: "Postgres, Docker, well-typed code. The interesting part is your business." },
+      p3: { t: "Own the outcome", d: "I don't hide behind tickets. If it's broken in production, it's mine." },
+      p4: { t: "Write it down", d: "ADRs, READMEs, runbooks. Future-you (and your team) will thank me." },
+    },
+    glance: {
+      title: "at a glance",
+      based: "Based in",
+      basedV: "Remote — EU timezone",
+      since: "Working solo since",
+      sinceV: "2019",
+      langs: "Languages",
+      langsV: "EN, RU, BE",
+      stack: "Stack",
+      stackV: "TS, React, .NET, Postgres",
+      open: "Open to",
+      openV: "Project & retainer work",
+      cta: "See projects →",
+    },
+    timeline: {
+      chip: "§ timeline",
+      heading: "A short history.",
+      items: [
+        { year: "2017", title: "First production C# backend", body: "Joined a fintech team. Learned what 'on call at 3am' really means." },
+        { year: "2019", title: "Independent consulting", body: "Started taking on freelance API and platform work for startups in the EU." },
+        { year: "2021", title: "Cross-platform shift", body: "Shipped my first React Native + .NET combo to 50k MAU." },
+        { year: "2023", title: "AI integrations", body: "RAG pipelines, agents, structured-output workflows for SaaS clients." },
+        { year: "2026", title: "Studio of one", body: "Selective engagements. Quality over quantity. You're reading the result." },
+      ],
+    },
+  },
+  pricing: {
+    chip: "§ pricing",
+    title1: "Honest",
+    titleAccent: "pricing",
+    title2: ". Real answers.",
+    intro:
+      "Three ways to work together. All prices are starting points — the final number depends on scope, urgency and what you already have.",
+    featured: "most picked",
+    tiers: {
+      sprint: {
+        name: "Sprint",
+        price: "from €2.5k",
+        duration: "1–2 weeks",
+        desc: "Landing pages, small features, audits, focused fixes.",
+        bullets: ["Fixed scope", "Daily updates", "Async-first", "Source code yours"],
+        cta: "Book a sprint",
+      },
+      project: {
+        name: "Project",
+        price: "from €8k",
+        duration: "3–8 weeks",
+        desc: "End-to-end builds: web apps, AI features, cross-platform releases.",
+        bullets: ["Discovery + scope", "Weekly demos", "CI/CD + tests", "30 days post-launch support"],
+        cta: "Plan a project",
+      },
+      retainer: {
+        name: "Retainer",
+        price: "from €5k / mo",
+        duration: "ongoing",
+        desc: "Reserved hours each month for backend, API or platform work.",
+        bullets: ["Reserved capacity", "Architecture & reviews", "On-call support", "Quarterly roadmap"],
+        cta: "Discuss retainer",
+      },
+    },
+    faqChip: "§ questions",
+    faqHeading: "FAQ.",
+    faqs: [
+      {
+        q: "What kind of jobs do you take?",
+        a: "Websites and landing pages, AI-integrated apps, cross-platform apps and C# backend improvements. I'm also open to long-term work on API platforms — microservices (with a clean Docker setup) or modular monoliths, API gateways, and complex tasks worth a real conversation.",
+      },
+      {
+        q: "Do you work with existing teams?",
+        a: "Yes — frequently. I drop into Slack/Linear, follow your conventions, and write PRs the same way your team does. I'm comfortable being the second pair of senior hands on a critical service.",
+      },
+      {
+        q: "Can you sign an NDA?",
+        a: "Always, before sharing anything sensitive. I also keep client work in isolated, encrypted environments.",
+      },
+      {
+        q: "How do you estimate?",
+        a: "After a 30-min call I send a written proposal: scope, milestones, fixed price (or a tight time-and-materials cap), and what I need from you. No surprises.",
+      },
+      {
+        q: "What about hosting and ops?",
+        a: "I set up Docker, CI/CD and observability as part of any backend project. Cloudflare, AWS, Hetzner, Fly.io — I've shipped to all of them.",
+      },
+      {
+        q: "Time zones and availability?",
+        a: "Based in EU. I take on a small number of projects per quarter to keep quality high. Reply within 48h, always.",
+      },
+    ],
+    finalTitle: "Still unsure? Let's",
+    finalAccent: "talk",
+    finalEnd: ".",
+    finalDesc:
+      "Send a few lines about what you're building. If it's a fit, we'll book a call. If it isn't, I'll point you to someone who is.",
+  },
+  projects: {
+    chip: "§ library",
+    title: "Projects.",
+    intro:
+      "A selection of recent work. NDAs apply where I can't share names — happy to walk through details on a call.",
+    categories: { all: "All", Web: "Web", AI: "AI", Mobile: "Mobile", Backend: "Backend", API: "API" },
+    caseStudy: "Case study →",
+    nextTitle: "Yours could be",
+    nextAccent: "next",
+    nextEnd: ".",
+    nextCta: "See pricing & FAQ →",
+    detail: {
+      backLink: "← Projects library",
+      problem: "The problem.",
+      approach: "The approach.",
+      outcome: "The outcome.",
+      gallery: "§ gallery",
+      references: "§ references",
+      related: "§ related",
+      client: "Client",
+      year: "Year",
+      stack: "Stack",
+      notFoundChip: "§ 404",
+      notFoundTitle: "Project not found.",
+      notFoundBack: "← Back to library",
+      errorTitle: "Something broke.",
+      formChip: "§ start something similar",
+      formTitle: "Want one like",
+      formDesc:
+        "Tell me what you're building. I usually reply within a working day with a shape-of-engagement and rough timeline.",
+      yourName: "Your name",
+      yourEmail: "Email",
+      messagePlaceholder: 'What do you have in mind for a "{{title}}"-style build?',
+      send: "Send request →",
+      orEmail: "or email hello@studio.dev",
+      sent: "✓ opening your mail client…",
+    },
+  },
+};
+
+export default en;

@@ -1,0 +1,231 @@
+.pricing-page {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.pricing-page__title {
+  margin-top: 1.5rem;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.pricing-page__title-acid {
+  color: var(--acid);
+  font-style: italic;
+}
+.pricing-page__intro {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  color: var(--muted-foreground);
+}
+.pricing-page__tiers {
+  margin-top: 4rem;
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+}
+.pricing-tier {
+  position: relative;
+  background: var(--background);
+  padding: 2rem;
+}
+.pricing-tier--featured {
+  transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+.pricing-tier__badge {
+  position: absolute;
+  left: 2rem;
+  top: -0.75rem;
+  border-radius: 999px;
+  background: var(--acid);
+  color: var(--acid-foreground);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+.pricing-tier__name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.pricing-tier__duration {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted-foreground);
+}
+.pricing-tier__price {
+  margin-top: 2rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--acid);
+}
+.pricing-tier__desc {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+.pricing-tier__bullets {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  padding: 0;
+  list-style: none;
+}
+.pricing-tier__bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.pricing-tier__bullet-icon {
+  margin-top: 0.25rem;
+  color: var(--acid);
+}
+.pricing-tier__cta {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  transition: all 0.2s;
+}
+.pricing-tier__cta--featured {
+  background: var(--acid);
+  color: var(--acid-foreground);
+}
+.pricing-tier__cta--featured:hover {
+  opacity: 0.9;
+}
+.pricing-tier__cta--outline {
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+.pricing-tier__cta--outline:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+.pricing-page__faq {
+  margin-top: 8rem;
+}
+.pricing-page__faq-title {
+  margin-top: 1rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+.pricing-page__faq-list {
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.pricing-page__final {
+  margin-top: 6rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 2.5rem;
+}
+.pricing-page__final-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+.pricing-page__final-desc {
+  margin-top: 1rem;
+  max-width: 36rem;
+  color: var(--muted-foreground);
+}
+.pricing-page__final-cta {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  background: var(--acid);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--acid-foreground);
+  transition: opacity 0.2s;
+}
+.pricing-page__final-cta:hover {
+  opacity: 0.9;
+}
+.faq-item__trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+}
+.faq-item__question {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.faq-item__plus {
+  color: var(--acid);
+  font-size: 1.5rem;
+  transition: transform 0.2s;
+}
+.faq-item__plus--open {
+  transform: rotate(45deg);
+}
+.faq-item__content {
+  overflow: hidden;
+}
+.faq-item__answer {
+  padding-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+@media (min-width: 768px) {
+  .pricing-page__title {
+    font-size: 6rem;
+  }
+
+  .pricing-page__faq-title {
+    font-size: 3.75rem;
+  }
+
+  .pricing-page__final-title {
+    font-size: 3rem;
+  }
+
+  .faq-item__question {
+    font-size: 1.25rem;
+  }
+
+  .pricing-page__tiers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .pricing-page__final {
+    padding: 4rem;
+  }
+}
+@media (min-width: 640px) {
+  .pricing-page__title {
+    font-size: 4.5rem;
+  }
+
+  .pricing-page__faq-title {
+    font-size: 3.75rem;
+  }
+
+  .pricing-page__final-title {
+    font-size: 3rem;
+  }
+}
