@@ -9,6 +9,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+TestResults/
 
 node_modules
 dist
@@ -34,3 +35,21 @@ dist-ssr
 *.sln
 *.sw?
 
+# Build outputs
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+*.nupkg
+
+# User/IDE files
+.vs/
+*.user
+*.suo
+*.userosscache
+.vscode/settings.json
+
+# Sensitive data
+appsettings.*.json
+secrets.json
+*.pfx
