@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { SUPPORTED_LANGUAGES } from "@/i18n";
+import { persistLanguage, setI18nLanguage, SUPPORTED_LANGUAGES } from "@/i18n";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./styles/language-switcher.scss";
@@ -28,12 +28,17 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
   const back = NEXT[front]; // flag peeking behind it
   const nextMeta = SUPPORTED_LANGUAGES.find((l) => l.code === front)!;
 
+  const handleChangeLanguage = (nextLanguage: string) => {
+    const language = persistLanguage(nextLanguage);
+    setI18nLanguage(language);
+  };
+
   return (
     <button
       type="button"
       aria-label={`${t("nav.language")}: ${nextMeta.name}`}
       title={nextMeta.name}
-      onClick={() => i18n.changeLanguage(front)}
+      onClick={() => handleChangeLanguage(front)}
       className={`lang-switcher ${className}`}
     >
       {/*
