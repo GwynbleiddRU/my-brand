@@ -172,6 +172,9 @@
   color: inherit;
   text-align: left;
 }
+.faq-item + .faq-item {
+  border-top: 1px solid var(--border);
+}
 .faq-item__question {
   font-size: 1.125rem;
   font-weight: 600;
