@@ -10,6 +10,16 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ProjectEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<ProjectStackEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<ProjectGalleryEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<ProjectApproachEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<ProjectOutcomeEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<ProjectReferenceEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<PricingTierEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<PricingTierBulletEntity>().HasKey(x => x.DbId);
+        modelBuilder.Entity<PricingFaqEntity>().HasKey(x => x.DbId);
+
         modelBuilder.Entity<ProjectEntity>()
             .HasIndex(x => new { x.Locale, x.Slug })
             .IsUnique();
