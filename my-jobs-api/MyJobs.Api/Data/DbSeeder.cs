@@ -47,7 +47,25 @@ public static class DbSeeder
                 "Monolithic releases were slow and risky, blocking roadmap delivery.",
                 ["Split into bounded services around payment lifecycle.","Introduced API gateway with auth, limits, and tracing.","Added one-command Docker Compose local setup."],
                 ["Uptime reached 99.98%.","Deployment duration dropped below 4 minutes.","Engineer onboarding reduced to one day."],
-                [new ProjectReferenceInputDto("S. Aydin","Head of Platform","Gateway and tracing paid off immediately.")])
+                [new ProjectReferenceInputDto("S. Aydin","Head of Platform","Gateway and tracing paid off immediately.")]),
+            new UpsertProjectDto(
+                "en","p04","trail-outdoor-tracking","Trail - outdoor tracking app","Solo founder","2024","Mobile",
+                "Cross-platform app with offline maps, background GPS and a minimal paywall.",
+                ["Expo","React Native","SQLite"],"4.8 stars app rating","https://picsum.photos/seed/trail-cover/1600/900",
+                ["https://picsum.photos/seed/trail-1/1600/900","https://picsum.photos/seed/trail-2/1600/900","https://picsum.photos/seed/trail-3/1600/900"],
+                "A founder needed iOS and Android app delivery without separate native teams.",
+                ["Built with Expo and custom background location support.","Implemented offline-first local storage and sync.","Integrated subscription onboarding and paywall flow."],
+                ["Released to both stores in under 12 weeks.","Reached 4.8 average rating with strong retention.","Stable background tracking across long sessions."],
+                [new ProjectReferenceInputDto("J. Park","Founder","Felt like having a senior mobile team without the headcount.")]),
+            new UpsertProjectDto(
+                "en","p05","ledger-csharp-refactor","Ledger - C# backend refactor","B2B accounting","2023","Backend",
+                "Modernized a legacy .NET backend with tests, observability and safer releases.",
+                ["C#","EF Core","xUnit","OpenTelemetry"],"60% fewer incidents","https://picsum.photos/seed/ledger-cover/1600/900",
+                ["https://picsum.photos/seed/ledger-1/1600/900","https://picsum.photos/seed/ledger-2/1600/900","https://picsum.photos/seed/ledger-3/1600/900"],
+                "A six-year-old monolith had no reliable tests and frequent production regressions.",
+                ["Added characterization tests around risky modules.","Introduced tracing and metrics for critical flows.","Reworked CI checks and deployment confidence gates."],
+                ["Production incidents dropped by 60% in two cycles.","Diagnosis time dropped from hours to minutes.","Team moved from risky weekly releases to predictable cadence."],
+                [new ProjectReferenceInputDto("T. Novak","CTO","Gave us back the ability to move.")])
         };
 
         foreach (var project in seedProjects)
