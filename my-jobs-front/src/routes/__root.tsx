@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { createIsomorphicFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -6,8 +7,30 @@ import { useTranslation } from "react-i18next";
 import appCss from "../styles.scss?url";
 import ScrollToTop from "@/components/ScrollToTop";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import "@/i18n";
+import { normalizeLanguage, setI18nLanguage } from "@/i18n";
 import "./styles/root.scss";
+
+function getClientLanguage() {
+  if (typeof localStorage !== "undefined") {
+    const fromLocalStorage = localStorage.getItem("lang");
+    if (fromLocalStorage) return normalizeLanguage(fromLocalStorage);
+  }
+
+  if (typeof document !== "undefined") {
+    const cookieMatch = document.cookie.match(/(?:^|;\s*)lang=([^;]+)/);
+    if (cookieMatch?.[1]) return normalizeLanguage(cookieMatch[1]);
+    return normalizeLanguage(document.documentElement.lang);
+  }
+
+  return "en";
+}
+
+const getInitialLanguage = createIsomorphicFn()
+  .server(async () => {
+    const { getCookie } = await import("@tanstack/react-start/server");
+    return normalizeLanguage(getCookie("lang"));
+  })
+  .client(() => getClientLanguage());
 
 function NotFoundComponent() {
   const { t } = useTranslation();
@@ -26,6 +49,7 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
+  loader: async () => ({ lang: await getInitialLanguage() }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -54,8 +78,11 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  const { lang } = Route.useLoaderData();
+  const syncedLanguage = setI18nLanguage(lang);
+
   return (
-    <html lang="en" className="app-shell dark">
+    <html lang={syncedLanguage} className="app-shell dark">
       <head>
         <HeadContent />
       </head>
