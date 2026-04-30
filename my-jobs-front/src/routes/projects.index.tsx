@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { projects, type ProjectCategory } from "@/lib/projects";
-import { fetchProjectsWithFallback } from "@/lib/content-api";
+import type { ProjectCategory } from "@/lib/projects";
+import { fallbackProjectList, fetchProjectsWithFallback } from "@/lib/content-api";
 import { normalizeLanguage } from "@/i18n";
 import "./styles/projects-index.scss";
 
@@ -29,7 +29,7 @@ const categories: Filter[] = ["all", "Web", "AI", "Mobile", "Backend", "API"];
 function ProjectsPage() {
   const { t, i18n } = useTranslation();
   const [filter, setFilter] = useState<Filter>("all");
-  const [items, setItems] = useState(projects);
+  const [items, setItems] = useState(fallbackProjectList);
   const visible = items.filter((p) => filter === "all" || p.category === filter);
 
   useEffect(() => {

@@ -26,11 +26,32 @@ type ApiLocaleResponse<T> = {
   data: T;
 };
 
-type ApiProjectListItem = Omit<Project, "gallery" | "problem" | "approach" | "outcome" | "references">;
+export type ProjectListItem = Omit<Project, "gallery" | "problem" | "approach" | "outcome" | "references">;
+type ApiProjectListItem = ProjectListItem;
 type ApiProjectDetail = Project & { related: ApiProjectListItem[] };
+
+export const fallbackProjectList: ProjectListItem[] = projects.map((project) => ({
+  id: project.id,
+  slug: project.slug,
+  title: project.title,
+  client: project.client,
+  year: project.year,
+  category: project.category,
+  summary: project.summary,
+  stack: project.stack,
+  metric: project.metric,
+  cover: project.cover,
+}));
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ?? "";
 const REQUEST_TIMEOUT_MS = 4500;
+
+function warnMockFallback(category: "projects-list" | "project-detail" | "pricing", locale: SupportedLanguage, error: unknown) {
+  console.warn(
+    `[content-api] API unavailable for ${category} (${locale}), using mock data fallback.`,
+    error,
+  );
+}
 
 async function requestJson<T>(path: string, locale: SupportedLanguage): Promise<T> {
   const controller = new AbortController();
@@ -52,12 +73,13 @@ async function requestJson<T>(path: string, locale: SupportedLanguage): Promise<
   }
 }
 
-export async function fetchProjectsWithFallback(locale: SupportedLanguage): Promise<Project[]> {
+export async function fetchProjectsWithFallback(locale: SupportedLanguage): Promise<ProjectListItem[]> {
   try {
     const response = await requestJson<ApiLocaleResponse<ApiProjectListItem[]>>("/api/content/projects", locale);
     return response.data;
-  } catch {
-    return projects;
+  } catch (error) {
+    warnMockFallback("projects-list", locale, error);
+    return fallbackProjectList;
   }
 }
 
@@ -82,7 +104,8 @@ export async function fetchProjectDetailWithFallback(
 
     const { related, ...project } = response.data;
     return { project, related: related as Project[] };
-  } catch {
+  } catch (error) {
+    warnMockFallback("project-detail", locale, error);
     return { project: fallbackProject, related: fallbackRelated };
   }
 }
@@ -94,7 +117,8 @@ export async function fetchPricingWithFallback(
   try {
     const response = await requestJson<ApiLocaleResponse<PricingContent>>("/api/content/pricing", locale);
     return response.data;
-  } catch {
+  } catch (error) {
+    warnMockFallback("pricing", locale, error);
     return fallback;
   }
 }
