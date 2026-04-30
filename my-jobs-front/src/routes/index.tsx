@@ -57,9 +57,9 @@ function Index() {
   const { t } = useTranslation();
 
   const metrics: Array<[string, string]> = [
-    ["08+", t("home.metrics.years")],
-    ["40+", t("home.metrics.delivered")],
-    ["12", t("home.metrics.countries")],
+    ["9+", t("home.metrics.years")],
+    ["20+", t("home.metrics.delivered")],
+    ["5", t("home.metrics.countries")],
     ["100%", t("home.metrics.code")],
   ];
 

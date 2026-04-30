@@ -29,7 +29,7 @@ const ru = {
   },
   home: {
     chip: "доступен для найма",
-    chipVersion: "v.2026 — независимый",
+    chipVersion: "v.2026 — самозанятый",
     titleA: "Я создаю",
     titleSoftware: "софт",
     titleB: "который работает.",
