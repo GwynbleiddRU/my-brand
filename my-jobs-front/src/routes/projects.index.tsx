@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { projects, type ProjectCategory } from "@/lib/projects";
+import { fetchProjectsWithFallback } from "@/lib/content-api";
+import { normalizeLanguage } from "@/i18n";
 import "./styles/projects-index.scss";
 
 export const Route = createFileRoute("/projects/")({
@@ -26,9 +27,15 @@ type Filter = "all" | ProjectCategory;
 const categories: Filter[] = ["all", "Web", "AI", "Mobile", "Backend", "API"];
 
 function ProjectsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [filter, setFilter] = useState<Filter>("all");
-  const visible = projects.filter((p) => filter === "all" || p.category === filter);
+  const [items, setItems] = useState(projects);
+  const visible = items.filter((p) => filter === "all" || p.category === filter);
+
+  useEffect(() => {
+    const locale = normalizeLanguage(i18n.resolvedLanguage);
+    void fetchProjectsWithFallback(locale).then(setItems);
+  }, [i18n.resolvedLanguage]);
 
   return (
     <div className="container projects-page">

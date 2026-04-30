@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getProjectBySlug, projects, type Project } from "@/lib/projects";
+import { fetchProjectDetailWithFallback } from "@/lib/content-api";
+import { normalizeLanguage } from "@/i18n";
 import "./styles/projects-slug.scss";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -58,11 +60,22 @@ function ErrorView({ error }: { error: Error }) {
 }
 
 function ProjectDetailPage() {
-  const { project: p } = Route.useLoaderData();
-  const { t } = useTranslation();
-  const related = projects
-    .filter((x) => x.slug !== p.slug && x.category === p.category)
-    .slice(0, 2);
+  const { project: initialProject } = Route.useLoaderData();
+  const { t, i18n } = useTranslation();
+  const { slug } = Route.useParams();
+  const [p, setProject] = useState(initialProject);
+  const [related, setRelated] = useState(
+    projects.filter((x) => x.slug !== initialProject.slug && x.category === initialProject.category).slice(0, 2),
+  );
+
+  useEffect(() => {
+    const locale = normalizeLanguage(i18n.resolvedLanguage);
+    void fetchProjectDetailWithFallback(slug, locale).then((result) => {
+      if (!result) return;
+      setProject(result.project);
+      setRelated(result.related);
+    });
+  }, [slug, i18n.resolvedLanguage]);
 
   return (
     <article>

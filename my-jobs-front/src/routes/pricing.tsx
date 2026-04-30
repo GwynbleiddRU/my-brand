@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { fetchPricingWithFallback, type PricingContent } from "@/lib/content-api";
+import { normalizeLanguage } from "@/i18n";
 import "./styles/pricing.scss";
 
 export const Route = createFileRoute("/pricing")({
@@ -23,21 +25,41 @@ export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-type Tier = {
-  name: string;
-  price: string;
-  duration: string;
-  desc: string;
-  bullets: string[];
-  cta: string;
-};
-type Faq = { q: string; a: string };
-
 function PricingPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const tierKeys = ["sprint", "project", "retainer"] as const;
   const featuredKey = "project";
-  const faqs = t("pricing.faqs", { returnObjects: true }) as Faq[];
+  const fallback: PricingContent = {
+    tiers: tierKeys.map((key) => {
+      const tier = t(`pricing.tiers.${key}`, { returnObjects: true }) as {
+        name: string;
+        price: string;
+        duration: string;
+        desc: string;
+        bullets: string[];
+        cta: string;
+      };
+      return {
+        key,
+        name: tier.name,
+        price: tier.price,
+        duration: tier.duration,
+        description: tier.desc,
+        bullets: tier.bullets,
+        cta: tier.cta,
+      };
+    }),
+    faqs: (t("pricing.faqs", { returnObjects: true }) as Array<{ q: string; a: string }>).map((item) => ({
+      question: item.q,
+      answer: item.a,
+    })),
+  };
+  const [content, setContent] = useState<PricingContent>(fallback);
+
+  useEffect(() => {
+    const locale = normalizeLanguage(i18n.resolvedLanguage);
+    void fetchPricingWithFallback(locale, fallback).then(setContent);
+  }, [i18n.resolvedLanguage]);
 
   return (
     <div className="container pricing-page">
@@ -51,7 +73,8 @@ function PricingPage() {
 
       <div className="pricing-page__tiers">
         {tierKeys.map((key) => {
-          const tier = t(`pricing.tiers.${key}`, { returnObjects: true }) as Tier;
+          const tier = content.tiers.find((x) => x.key === key);
+          if (!tier) return null;
           const featured = key === featuredKey;
           return (
             <div key={key} className={`pricing-tier ${featured ? "pricing-tier--featured" : ""}`}>
@@ -61,7 +84,7 @@ function PricingPage() {
               <h3 className="pricing-tier__name text-display">{tier.name}</h3>
               <p className="pricing-tier__duration text-mono">{tier.duration}</p>
               <p className="pricing-tier__price text-display">{tier.price}</p>
-              <p className="pricing-tier__desc">{tier.desc}</p>
+              <p className="pricing-tier__desc">{tier.description}</p>
               <ul className="pricing-tier__bullets">
                 {tier.bullets.map((b) => (
                   <li key={b} className="pricing-tier__bullet">
@@ -85,8 +108,8 @@ function PricingPage() {
         <span className="chip">{t("pricing.faqChip")}</span>
         <h2 className="pricing-page__faq-title text-display">{t("pricing.faqHeading")}</h2>
         <div className="pricing-page__faq-list">
-          {faqs.map((f, i) => (
-            <FaqItem key={i} q={f.q} a={f.a} />
+          {content.faqs.map((f, i) => (
+            <FaqItem key={i} q={f.question} a={f.answer} />
           ))}
         </div>
       </section>
