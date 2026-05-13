@@ -2,12 +2,13 @@
   "name": "my-jobs-root",
   "private": true,
   "scripts": {
-    "start": "npm --prefix my-jobs-front start",
-    "dev": "npm --prefix my-jobs-front dev",
-    "build": "npm --prefix my-jobs-front build",
-    "preview": "npm --prefix my-jobs-front preview",
-    "lint": "npm --prefix my-jobs-front lint",
-    "format": "npm --prefix my-jobs-front format"
+    "start": "npm --prefix my-jobs-front run start",
+    "dev": "npm --prefix my-jobs-front run dev",
+    "build": "npm --prefix my-jobs-front run build",
+    "deploy:pages": "npm --prefix my-jobs-front run build:pages",
+    "preview": "npm --prefix my-jobs-front run preview",
+    "lint": "npm --prefix my-jobs-front run lint",
+    "format": "npm --prefix my-jobs-front run format"
   },
   "devDependencies": {
     "sass-embedded": "^1.99.0"

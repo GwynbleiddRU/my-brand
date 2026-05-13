@@ -1,11 +1,10 @@
-import { createRouter, useRouter } from "@tanstack/react-router";
+import { createHashHistory } from "@tanstack/history";
+import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import "./i18n";
 import "./routes/styles/router.scss";
 
 function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  const router = useRouter();
-
   return (
     <div className="router-error">
       <div className="router-error__content">
@@ -33,14 +32,13 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
         <div className="router-error__actions">
           <button
             onClick={() => {
-              router.invalidate();
               reset();
             }}
             className="router-error__btn router-error__btn--primary"
           >
             Try again
           </button>
-          <a href="/" className="router-error__btn router-error__btn--secondary">
+          <a href={`${import.meta.env.BASE_URL}#/`} className="router-error__btn router-error__btn--secondary">
             Go home
           </a>
         </div>
@@ -53,6 +51,8 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: {},
+    // hash routing
+    ...(typeof document !== "undefined" ? { history: createHashHistory() } : {}),
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,

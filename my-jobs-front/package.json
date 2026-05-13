@@ -1,6 +1,7 @@
 {
   "name": "tanstack_start_ts",
   "private": true,
+  "homepage": "https://gwynbleiddru.github.io/my-brand",
   "sideEffects": false,
   "type": "module",
   "engines": {
@@ -9,7 +10,9 @@
   "scripts": {
     "start": "vite dev",
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build --config vite.github-pages.config.ts && node -e \"require('node:fs').copyFileSync('../docs/index.html', '../docs/404.html')\"",
+    "build:start": "vite build",
+    "build:pages": "npm run build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
@@ -45,6 +48,7 @@
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.2.1",
+    "@tanstack/history": "^1.161.6",
     "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-router": "^1.168.0",
     "@tanstack/react-start": "^1.167.14",
