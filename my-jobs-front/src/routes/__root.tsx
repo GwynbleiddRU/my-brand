@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import ScrollToTop from "@/components/ScrollToTop";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { normalizeLanguage, setI18nLanguage } from "@/i18n";
+
+import "../styles.scss";
 import "./styles/root.scss";
 
 function getClientLanguage() {

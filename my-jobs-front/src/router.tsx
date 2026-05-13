@@ -1,8 +1,10 @@
-import { createHashHistory } from "@tanstack/history";
-import { createRouter } from "@tanstack/react-router";
+import { createRouter, Link } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import "./i18n";
 import "./routes/styles/router.scss";
+
+const trimmedBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basepath = trimmedBase === "" ? "/" : trimmedBase;
 
 function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
@@ -38,9 +40,9 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
           >
             Try again
           </button>
-          <a href={`${import.meta.env.BASE_URL}#/`} className="router-error__btn router-error__btn--secondary">
+          <Link to="/" className="router-error__btn router-error__btn--secondary">
             Go home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -51,8 +53,7 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: {},
-    // hash routing
-    ...(typeof document !== "undefined" ? { history: createHashHistory() } : {}),
+    basepath,
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,

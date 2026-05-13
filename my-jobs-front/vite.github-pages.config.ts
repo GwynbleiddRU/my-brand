@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  // base: "/my-brand/",
+  base: "/my-brand/",
   plugins: [react(), tailwindcss(), tsConfigPaths()],
   build: {
     outDir: "../docs",
