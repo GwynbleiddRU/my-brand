@@ -1,22 +1,14 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { createIsomorphicFn } from "@tanstack/react-start";
 import { useLayoutEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import ScrollToTop from "@/components/ScrollToTop";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { getStoredLanguage, normalizeLanguage, setI18nLanguage } from "@/i18n";
+import { getStoredLanguage, setI18nLanguage } from "@/i18n";
 
 import "../styles.scss";
 import "./styles/root.scss";
-
-const getInitialLanguage = createIsomorphicFn()
-  .server(async () => {
-    const { getCookie } = await import("@tanstack/react-start/server");
-    return normalizeLanguage(getCookie("lang"));
-  })
-  .client(() => getStoredLanguage());
 
 function NotFoundComponent() {
   const { t } = useTranslation();
@@ -35,7 +27,7 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  loader: async () => ({ lang: await getInitialLanguage() }),
+  loader: () => ({ lang: getStoredLanguage() }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
