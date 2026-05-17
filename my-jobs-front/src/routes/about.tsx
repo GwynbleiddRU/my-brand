@@ -6,7 +6,7 @@ import "./styles/about.scss";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Independent Engineer // studio.dev" },
+      { title: "About — Independent Engineer // my-brand.dev" },
       {
         name: "description",
         content:

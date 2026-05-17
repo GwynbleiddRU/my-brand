@@ -6,13 +6,13 @@ import "./styles/index.scss";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Studio // Independent Engineer — Web, AI & C# Backends" },
+      { title: "Independent Engineer // my-brand.dev — Web, AI & C# Backends" },
       {
         name: "description",
         content:
           "Independent engineer for hire: websites, landing pages, AI-integrated apps, cross-platform apps, C# backend improvements and API/microservice work.",
       },
-      { property: "og:title", content: "Studio // Independent Engineer" },
+      { property: "og:title", content: "Independent Engineer // my-brand.dev" },
       {
         property: "og:description",
         content: "Websites, AI apps, cross-platform & C# backend engineering.",
@@ -180,7 +180,7 @@ function Index() {
             {t("home.cta.titleEnd")}
           </h2>
           <p className="home-cta__desc">{t("home.cta.desc")}</p>
-          <a href="mailto:hello@studio.dev" className="home-btn home-btn--solid home-cta__button">
+          <a href="mailto:hello@my-brand.dev" className="home-btn home-btn--solid home-cta__button">
             {t("common.email")}
           </a>
         </div>

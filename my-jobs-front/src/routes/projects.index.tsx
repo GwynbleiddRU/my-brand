@@ -10,13 +10,13 @@ import "./styles/projects-index.scss";
 export const Route = createFileRoute("/projects/")({
   head: () => ({
     meta: [
-      { title: "Projects Library — studio.dev" },
+      { title: "Projects Library — my-brand.dev" },
       {
         name: "description",
         content:
           "A library of projects: web apps, AI integrations, cross-platform apps, microservices and C# backends.",
       },
-      { property: "og:title", content: "Projects Library — studio.dev" },
+      { property: "og:title", content: "Projects Library — my-brand.dev" },
       { property: "og:description", content: "Selected work across web, AI, mobile and backend." },
     ],
   }),

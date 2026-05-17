@@ -1,29 +1,22 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { useState } from "react";
+import { createIsomorphicFn } from "@tanstack/react-start";
+import { useLayoutEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import ScrollToTop from "@/components/ScrollToTop";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { normalizeLanguage, setI18nLanguage } from "@/i18n";
+import { getStoredLanguage, normalizeLanguage, setI18nLanguage } from "@/i18n";
 
 import "../styles.scss";
 import "./styles/root.scss";
 
-function getClientLanguage() {
-  if (typeof localStorage !== "undefined") {
-    const fromLocalStorage = localStorage.getItem("lang");
-    if (fromLocalStorage) return normalizeLanguage(fromLocalStorage);
-  }
-
-  if (typeof document !== "undefined") {
-    const cookieMatch = document.cookie.match(/(?:^|;\s*)lang=([^;]+)/);
-    if (cookieMatch?.[1]) return normalizeLanguage(cookieMatch[1]);
-    return normalizeLanguage(document.documentElement.lang);
-  }
-
-  return "en";
-}
+const getInitialLanguage = createIsomorphicFn()
+  .server(async () => {
+    const { getCookie } = await import("@tanstack/react-start/server");
+    return normalizeLanguage(getCookie("lang"));
+  })
+  .client(() => getStoredLanguage());
 
 function NotFoundComponent() {
   const { t } = useTranslation();
@@ -42,26 +35,24 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  loader: () => ({ lang: getClientLanguage() }),
+  loader: async () => ({ lang: await getInitialLanguage() }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Studio // Independent Engineer — Web, AI & C# Backends" },
+      { title: "Independent Engineer // my-brand.dev— Web, AI & C# Backends" },
       {
         name: "description",
         content:
-          "Independent engineer building websites, landing pages, AI-integrated apps, cross-platform apps and C# backends.",
+          "Independent engineer building landing pages and complex websites, AI-integrated apps, cross-platform apps and C# backends.",
       },
       { name: "author", content: "Independent Engineer" },
-      { property: "og:title", content: "Studio // Independent Engineer" },
+      { property: "og:title", content: "Independent Engineer // my-brand.dev" },
       {
         property: "og:description",
         content: "Websites, AI apps, cross-platform & C# backend engineering — for hire.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
   }),
   shellComponent: RootShell,
@@ -70,11 +61,18 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
-  const { lang } = Route.useLoaderData();
-  const syncedLanguage = setI18nLanguage(lang);
+  const { lang: loaderLang } = Route.useLoaderData();
+  const [htmlLang, setHtmlLang] = useState(loaderLang);
+
+  // Sync once from storage; do not call setI18nLanguage(loaderLang) on every render —
+  // that overwrote the user's choice after LanguageSwitcher updated i18n.
+  useLayoutEffect(() => {
+    const synced = setI18nLanguage(getStoredLanguage());
+    setHtmlLang(synced);
+  }, [loaderLang]);
 
   return (
-    <html lang={syncedLanguage} className="app-shell dark">
+    <html lang={htmlLang} className="app-shell dark">
       <head>
         <HeadContent />
       </head>
@@ -107,7 +105,7 @@ function SiteHeader() {
       <div className="site-header__inner container">
         <Link to="/" onClick={() => setOpen(false)} className="site-header__brand">
           <span className="site-header__logo">//</span>
-          <span className="site-header__brand-text">studio.dev</span>
+          <span className="site-header__brand-text">my-brand.dev</span>
         </Link>
         <nav className="site-header__nav">
           <Link
@@ -142,7 +140,7 @@ function SiteHeader() {
         </nav>
         <div className="site-header__actions">
           <LanguageSwitcher />
-          <a href="mailto:hello@studio.dev" className="site-header__cta">
+          <a href="mailto:hello@my-brand.dev" className="site-header__cta">
             {t("nav.cta")}
           </a>
         </div>
@@ -200,7 +198,7 @@ function SiteHeader() {
               <LanguageSwitcher />
             </div>
             <a
-              href="mailto:hello@studio.dev"
+              href="mailto:hello@my-brand.dev"
               onClick={() => setOpen(false)}
               className="site-header__mobile-cta"
             >
@@ -221,7 +219,7 @@ function SiteFooter() {
         <div className="site-footer__brand-col">
           <div className="site-footer__brand">
             <span className="site-footer__logo">//</span>
-            <span className="site-footer__brand-text">studio.dev</span>
+            <span className="site-footer__brand-text">my-brand.dev</span>
           </div>
           <p className="site-footer__tagline">{t("footer.tagline")}</p>
         </div>
@@ -249,8 +247,8 @@ function SiteFooter() {
           <p className="site-footer__heading">{t("footer.contact")}</p>
           <ul className="site-footer__list">
             <li>
-              <a href="mailto:hello@studio.dev" className="site-footer__link">
-                hello@studio.dev
+              <a href="mailto:hello@my-brand.dev" className="site-footer__link">
+                hello@my-brand.dev
               </a>
             </li>
             <li>

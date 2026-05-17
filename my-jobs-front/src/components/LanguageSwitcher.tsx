@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { persistLanguage, setI18nLanguage, SUPPORTED_LANGUAGES } from "@/i18n";
+import { getStoredLanguage, persistLanguage, setI18nLanguage, SUPPORTED_LANGUAGES } from "@/i18n";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./styles/language-switcher.scss";
@@ -22,11 +22,11 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const current = (mounted ? i18n.resolvedLanguage : "en") || "en";
+  const current = (mounted ? i18n.resolvedLanguage : getStoredLanguage()) || "en";
   const base = ["en", "ru", "be"].find((c) => current.startsWith(c)) || "en";
-  const front = NEXT[base]; // flag shown at front — target language on click
-  const back = NEXT[front]; // flag peeking behind it
-  const nextMeta = SUPPORTED_LANGUAGES.find((l) => l.code === front)!;
+  const front = base; // current language
+  const back = NEXT[base]; // next language on click (en → ru → be)
+  const nextMeta = SUPPORTED_LANGUAGES.find((l) => l.code === back)!;
 
   const handleChangeLanguage = (nextLanguage: string) => {
     const language = persistLanguage(nextLanguage);
@@ -38,22 +38,18 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
       type="button"
       aria-label={`${t("nav.language")}: ${nextMeta.name}`}
       title={nextMeta.name}
-      onClick={() => handleChangeLanguage(front)}
+      onClick={() => handleChangeLanguage(back)}
       className={`lang-switcher ${className}`}
     >
       {/*
-        Back flag — peeking from top-right.
-        Transform order matches framer-motion's own order (translate → scale) so the
-        entering front flag starts at the exact same visual position.
+        Back flag — next language in cycle (en → ru → be), peeking from top-right.
       */}
       <span aria-hidden="true" className="lang-switcher__back">
         {FLAGS[back]}
       </span>
 
       {/*
-        Front flag — diagonal travel: top-right (back position) → center → bottom-left (exit).
-        initial  = back flag's visual position  →  seamless "pops out from behind" entrance.
-        exit     = opposite diagonal            →  continues the motion past the front.
+        Front flag — current language; animates on switch (back peek position → center → exit).
       */}
       <AnimatePresence>
         <motion.span

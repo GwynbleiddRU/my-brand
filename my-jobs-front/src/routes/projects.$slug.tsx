@@ -15,12 +15,12 @@ export const Route = createFileRoute("/projects/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.project;
-    if (!p) return { meta: [{ title: "Project — studio.dev" }] };
+    if (!p) return { meta: [{ title: "Project — my-brand.dev" }] };
     return {
       meta: [
-        { title: `${p.title} — studio.dev` },
+        { title: `${p.title} — my-brand.dev` },
         { name: "description", content: p.summary },
-        { property: "og:title", content: `${p.title} — studio.dev` },
+        { property: "og:title", content: `${p.title} — my-brand.dev` },
         { property: "og:description", content: p.summary },
         { property: "og:image", content: p.cover },
         { name: "twitter:image", content: p.cover },
@@ -243,7 +243,7 @@ function RequestForm({ projectTitle }: { projectTitle: string }) {
     e.preventDefault();
     const subject = encodeURIComponent(`Project request: ${projectTitle}`);
     const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
-    window.location.href = `mailto:hello@studio.dev?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@my-brand.dev?subject=${subject}&body=${body}`;
     setSent(true);
   };
 
@@ -286,7 +286,7 @@ function RequestForm({ projectTitle }: { projectTitle: string }) {
             <button type="submit" className="project-detail-form__submit text-mono">
               {t("projects.detail.send")}
             </button>
-            <a href="mailto:hello@studio.dev" className="project-detail-form__email text-mono">
+            <a href="mailto:hello@my-brand.dev" className="project-detail-form__email text-mono">
               {t("projects.detail.orEmail")}
             </a>
             {sent && (

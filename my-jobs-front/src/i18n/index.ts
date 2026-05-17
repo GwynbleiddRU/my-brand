@@ -18,6 +18,24 @@ export function normalizeLanguage(value?: string | null): SupportedLanguage {
   return match?.code ?? "en";
 }
 
+/** Read persisted language from localStorage or cookie (client only). */
+export function getStoredLanguage(): SupportedLanguage {
+  if (typeof localStorage !== "undefined") {
+    const fromLocalStorage = localStorage.getItem("lang");
+    if (fromLocalStorage) return normalizeLanguage(fromLocalStorage);
+  }
+
+  if (typeof document !== "undefined") {
+    const cookieMatch = document.cookie.match(/(?:^|;\s*)lang=([^;]+)/);
+    if (cookieMatch?.[1]) return normalizeLanguage(cookieMatch[1]);
+  }
+
+  return "en";
+}
+
+const initialLanguage =
+  typeof window !== "undefined" ? getStoredLanguage() : "en";
+
 if (!i18n.isInitialized) {
   i18n
     .use(initReactI18next)
@@ -28,7 +46,7 @@ if (!i18n.isInitialized) {
         be: { translation: be },
       },
       fallbackLng: "en",
-      lng: "en",
+      lng: initialLanguage,
       supportedLngs: ["en", "ru", "be"],
       interpolation: { escapeValue: false },
     });

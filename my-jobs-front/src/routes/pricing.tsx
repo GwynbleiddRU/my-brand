@@ -9,13 +9,13 @@ import "./styles/pricing.scss";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing & FAQ — studio.dev" },
+      { title: "Pricing & FAQ — my-brand.dev" },
       {
         name: "description",
         content:
           "Transparent pricing for websites, AI apps, cross-platform apps, C# backends and API/microservice work.",
       },
-      { property: "og:title", content: "Pricing & FAQ — studio.dev" },
+      { property: "og:title", content: "Pricing & FAQ — my-brand.dev" },
       {
         property: "og:description",
         content: "Engagement options, pricing and answers to common questions.",
@@ -94,7 +94,7 @@ function PricingPage() {
                 ))}
               </ul>
               <a
-                href="mailto:hello@studio.dev"
+                href="mailto:hello@my-brand.dev"
                 className={`pricing-tier__cta text-mono ${featured ? "pricing-tier__cta--featured" : "pricing-tier__cta--outline"}`}
               >
                 {tier.cta} →
@@ -121,7 +121,7 @@ function PricingPage() {
           {t("pricing.finalEnd")}
         </h2>
         <p className="pricing-page__final-desc">{t("pricing.finalDesc")}</p>
-        <a href="mailto:hello@studio.dev" className="pricing-page__final-cta text-mono">
+        <a href="mailto:hello@my-brand.dev" className="pricing-page__final-cta text-mono">
           {t("common.email")}
         </a>
       </div>
